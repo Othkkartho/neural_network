@@ -5,7 +5,7 @@ import sys
 sys.path.append(os.pardir)
 import numpy as np
 import matplotlib.pyplot as plt
-from dataset.mnist import load_mnist
+from dataset.mnist_ass import load_mnist
 from two_layer_net import TwoLayerNet
 from three_layer_net import ThreeLayerNet
 
@@ -14,7 +14,7 @@ epoch = 1
 # 데이터 읽기
 (x_train, t_train), (x_test, t_test) = load_mnist(normalize=True, one_hot_label=True)
 
-network = TwoLayerNet(input_size=784, hidden_size=50, output_size=10)
+network = TwoLayerNet(input_size=196, hidden_size=50, output_size=10)
 # network = ThreeLayerNet(input_size=784, hidden_size1=50, hidden_size2=25, output_size=10)
 
 iters_num = 10000
