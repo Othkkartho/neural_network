@@ -56,7 +56,7 @@ def _load_label(file_name):
 
 
 def _load_img(file_name):
-    skip = int(784 / img_size)
+    skip = int(784 / img_size)      # 데이터 크기 설정에 맞는 배열을 만들게 하기 위해 슬라이싱 간격을 정하는 변수
     file_path = dataset_dir + "/" + file_name
 
     print("Converting " + file_name + " to NumPy Array ...")
