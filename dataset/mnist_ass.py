@@ -24,8 +24,6 @@ train_num = 60000
 test_num = 10000
 img_dim = (1, 28, 28)
 img_size = 784
-# img_dim = (1, 28, 28)
-# img_size = 784
 
 
 def _download(file_name):
