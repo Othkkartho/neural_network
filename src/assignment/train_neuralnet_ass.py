@@ -14,7 +14,7 @@ epoch = 1
 # 데이터 읽기
 (x_train, t_train), (x_test, t_test) = load_mnist(normalize=True, one_hot_label=True)
 
-network = TwoLayerNet(input_size=196, hidden_size=50, output_size=10)
+network = TwoLayerNet(input_size=784, hidden_size=50, output_size=10)
 # network = ThreeLayerNet(input_size=784, hidden_size1=50, hidden_size2=25, output_size=10)
 
 iters_num = 10000
@@ -34,7 +34,8 @@ for i in range(iters_num):
     t_batch = t_train[batch_mask]
 
     # 기울기 계산
-    grad = network.gradient(x_batch, t_batch)  # 오차역전파법 방식(훨씬 빠르다)
+    grad = network.numerical_gradient(x_batch, t_batch)   # 수치 미분 방식
+    # grad = network.gradient(x_batch, t_batch)  # 오차역전파법 방식(훨씬 빠르다)
 
     # 갱신
     for key in ('W1', 'b1', 'W2', 'b2'):
