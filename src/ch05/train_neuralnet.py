@@ -30,6 +30,7 @@ for i in range(iters_num):
     t_batch = t_train[batch_mask]
 
     # 기울기 계산
+    # grad = network.numerical_gradient(x_batch, t_batch)   # 수치 미분 방식
     grad = network.gradient(x_batch, t_batch)  # 오차역전파법 방식(훨씬 빠르다)
 
     # 갱신
