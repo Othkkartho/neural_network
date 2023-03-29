@@ -295,17 +295,42 @@ def two_train_start(start, end, skip):
     plt.legend(loc='lower right')
     plt.show()
 
-    # 최대 최소 train acc와 test acc 를 hidden size와 함께 print됨.
+    count = 0
+    for train_avg in train_avg_list:
+        if train_avg == max(train_avg_list):
+            print('two layer highest avg acc hidden node: ', acc_avg_list[count][0],'train_acc: ', train_avg)
+
+        count += 1
+
+    count = 0
+    for test_avg in test_avg_list:
+        if test_avg == max(test_avg_list):
+            print('two layer highest avg acc hidden node: ', acc_avg_list[count][0], 'test_acc: ', test_avg)
+        count += 1
 
 
 def three_train_start(start, end, skip):
-    acc_av_list = []
+    acc_avg_list = []
 
     for i in range(start, end, skip):
         for j in range(start, end, skip):
-            acc_av_list.append(three_layer(hidden1=i, hidden2=j))
+            acc_avg_list.append(three_layer(hidden1=i, hidden2=j))
 
-    print(acc_av_list)
+    train_avg_list = []
+    test_avg_list = []
+    for i in range(0, len(acc_avg_list)):
+        train_avg_list.append(acc_avg_list[i][3])
+        test_avg_list.append(acc_avg_list[i][4])
+
+    markers = {'train': 'o', 'test': 's'}
+    x = np.arange(len(train_avg_list)) + 1
+    plt.plot(x, train_avg_list, 'bo-', label='train avg')
+    plt.plot(x, test_avg_list, 'bo--', label='test avg')
+    plt.xlabel("hidden node")
+    plt.ylabel("accuracy")
+    plt.ylim(min(np.min(train_avg_list), np.min(test_avg_list)) - 0.02, 1)
+    plt.legend(loc='lower right')
+    plt.show()
 
 
 def four_train_start(start, end, skip):
