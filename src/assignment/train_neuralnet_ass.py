@@ -226,7 +226,7 @@ def five_layer(self=0):
             # print("train_acc: ", train_acc, ", test_acc: ", test_acc)
 
     # 그래프 그리기
-    # grape1(train_acc_list, test_acc_list)
+    grape1(train_acc_list, test_acc_list)
 
     hidden_list = [100, 75, 50, 25]
     train_avg = sum(train_acc_list[-10:]) / 10
