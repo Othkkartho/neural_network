@@ -12,13 +12,12 @@ from four_layer_net import FourLayerNet
 from five_layer_net import FiveLayerNet
 
 
-def two_layer(hidden1=0):
+def two_layer(inputSize=784, hidden1=0):
     # 데이터 읽기
     (x_train, t_train), (x_test, t_test) = load_mnist(normalize=True, one_hot_label=True)
 
     # 2~4 계층까지 데이터 생성해 저장. 4 계층 이후는 정확도 올라가는 속도가 너무 늦거나, 안올라 가기 때문에 이후는 안만듬. 2~4 까지만 하면 될 듯, 레이어 노드 수를 변경하려면
-    # hidden_size를 변경 input_size를 변경한다면 dataset 파일 mnist_ass 코드의 img_size 변수도 변경시켜야 함. (변경 추천 수치, 392, 196)
-    network = TwoLayerNet(input_size=784, hidden_size=hidden1, output_size=10)
+    network = TwoLayerNet(input_size=inputSize, hidden_size=hidden1, output_size=10)
 
     # 하이퍼파라미터
     iters_num = 10000  # 반복 횟수 설정
@@ -69,11 +68,11 @@ def two_layer(hidden1=0):
     return hidden_list, train_acc_list, test_acc_list, train_avg, test_avg
 
 
-def three_layer(hidden1=0, hidden2=0):
+def three_layer(inputSize=784, hidden1=0, hidden2=0):
     # 데이터 읽기
     (x_train, t_train), (x_test, t_test) = load_mnist(normalize=True, one_hot_label=True)
 
-    network = ThreeLayerNet(input_size=784, hidden_size1=hidden1, hidden_size2=hidden2, output_size=10)
+    network = ThreeLayerNet(input_size=inputSize, hidden_size1=hidden1, hidden_size2=hidden2, output_size=10)
 
     # 하이퍼파라미터
     iters_num = 10000  # 반복 횟수 설정
@@ -124,11 +123,11 @@ def three_layer(hidden1=0, hidden2=0):
     return hidden_list, train_acc_list, test_acc_list, train_avg, test_avg
 
 
-def four_layer(hidden1=0, hidden2=0, hidden3=0):
+def four_layer(inputSize=784, hidden1=0, hidden2=0, hidden3=0):
     # 데이터 읽기
     (x_train, t_train), (x_test, t_test) = load_mnist(normalize=True, one_hot_label=True)
 
-    network = FourLayerNet(input_size=784, hidden_size1=hidden1, hidden_size2=hidden2, hidden_size3=hidden3,
+    network = FourLayerNet(input_size=inputSize, hidden_size1=hidden1, hidden_size2=hidden2, hidden_size3=hidden3,
                            output_size=10)
 
     # 하이퍼파라미터
@@ -180,11 +179,11 @@ def four_layer(hidden1=0, hidden2=0, hidden3=0):
     return hidden_list, train_acc_list, test_acc_list, train_avg, test_avg
 
 
-def five_layer(self=0):
+def five_layer(inputSize=784):
     # 데이터 읽기
     (x_train, t_train), (x_test, t_test) = load_mnist(normalize=True, one_hot_label=True)
 
-    network = FiveLayerNet(input_size=784, hidden_size1=100, hidden_size2=75, hidden_size3=50, hidden_size4=25,
+    network = FiveLayerNet(input_size=inputSize, hidden_size1=100, hidden_size2=75, hidden_size3=50, hidden_size4=25,
                            output_size=10)
 
     iters_num = 10000
@@ -236,39 +235,39 @@ def five_layer(self=0):
 
 
 # 각 레이어 시작 함수들
-def two_train_start(start, end, skip):
+def two_train_start(input_size, start, end, skip):
     acc_avg_list = []
 
     for i in range(start, end, skip):
-        acc_avg_list.append(two_layer(hidden1=i))
+        acc_avg_list.append(two_layer(input_size, hidden1=i))
 
     grape2('two layer', acc_avg_list)
 
 
-def three_train_start(start, end, skip):
+def three_train_start(input_size, start, end, skip):
     acc_avg_list = []
 
     for i in range(start, end, skip):
         for j in range(start, end, skip):
-            acc_avg_list.append(three_layer(hidden1=i, hidden2=j))
+            acc_avg_list.append(three_layer(input_size, hidden1=i, hidden2=j))
 
     grape2('three layer', acc_avg_list)
 
 
-def four_train_start(start, end, skip):
+def four_train_start(input_size, start, end, skip):
     acc_avg_list = []
 
     for i in range(start, end, skip):
         for j in range(start, end, skip):
             for k in range(start, end, skip):
-                acc_avg_list.append(four_layer(hidden1=i, hidden2=j, hidden3=k))
+                acc_avg_list.append(four_layer(input_size, hidden1=i, hidden2=j, hidden3=k))
 
     grape2('four layer', acc_avg_list)
 
 
 # 정확도가 박살나 굳이 경우의 수를 구하지는 않았음.
-def five_train_start():
-    acc_av_list = [five_layer()]
+def five_train_start(input_size):
+    acc_av_list = [five_layer(input_size)]
 
     print('five layer 에서 테스트 기준 최대 평균 정확도를 보인 노드:', acc_av_list[0][0], '평균 트레이너 정확도:', round(acc_av_list[0][3], 5), '평균 테스트 정확도:', round(acc_av_list[0][4]), 5)
 
