@@ -298,6 +298,7 @@ def grape2(layer, acc_list):
     x = np.arange(len(train_avg_list)) + 1
     plt.plot(x, train_avg_list, label='train avg')
     plt.plot(x, test_avg_list, label='test avg', linestyle='--')
+    plt.title(layer)
     plt.xlabel("hidden node")
     plt.ylabel("accuracy")
     plt.xlim(0, (len(train_avg_list)+1))
