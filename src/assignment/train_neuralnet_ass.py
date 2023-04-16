@@ -58,12 +58,12 @@ def two_layer(inputSize=784, hidden1=0):
             test_acc_list.append(test_acc)
             # print("train_acc: ", train_acc, ", test_acc: ", test_acc)
 
-    # 그래프 그리기
-    # grape1(train_acc_list, test_acc_list)
-
     hidden_list = [hidden1]
     train_avg = sum(train_acc_list[-10:]) / 10
     test_avg = sum(test_acc_list[-10:]) / 10
+
+    # 그래프 그리기
+    grape1(hidden_list, train_acc_list, test_acc_list)
 
     return hidden_list, train_acc_list, test_acc_list, train_avg, test_avg
 
@@ -113,12 +113,12 @@ def three_layer(inputSize=784, hidden1=0, hidden2=0):
             test_acc_list.append(test_acc)
             # print("train_acc: ", train_acc, ", test_acc: ", test_acc)
 
-    # 그래프 그리기
-    # grape1(train_acc_list, test_acc_list)
-
     hidden_list = [hidden1, hidden2]
     train_avg = sum(train_acc_list[-10:]) / 10
     test_avg = sum(test_acc_list[-10:]) / 10
+
+    # 그래프 그리기
+    grape1(hidden_list, train_acc_list, test_acc_list)
 
     return hidden_list, train_acc_list, test_acc_list, train_avg, test_avg
 
@@ -169,12 +169,12 @@ def four_layer(inputSize=784, hidden1=0, hidden2=0, hidden3=0):
             test_acc_list.append(test_acc)
             # print("train_acc: ", train_acc, ", test_acc: ", test_acc)
 
-    # 그래프 그리기
-    # grape1(train_acc_list, test_acc_list)
-
     hidden_list = [hidden1, hidden2, hidden3]
     train_avg = sum(train_acc_list[-10:]) / 10
     test_avg = sum(test_acc_list[-10:]) / 10
+
+    # 그래프 그리기
+    grape1(hidden_list, train_acc_list, test_acc_list)
 
     return hidden_list, train_acc_list, test_acc_list, train_avg, test_avg
 
@@ -273,20 +273,26 @@ def five_train_start(input_size):
 
 
 # 주어진 노드의 그래프를 그립니다.
-def grape1(train_acc_list, test_acc_list):
+def grape1(hidden_list, train_acc_list, test_acc_list):
     markers = {'train': 'o', 'test': 's'}
     x = np.arange(len(train_acc_list))
     plt.plot(x, train_acc_list, label='train acc')
     plt.plot(x, test_acc_list, label='test acc', linestyle='--')
+    plt.title(hidden_list)
     plt.xlabel("epochs")
     plt.ylabel("accuracy")
     plt.ylim(0, 1.0)
     plt.legend(loc='lower right')
-    plt.show()
+    # plt.show()
+    hidden = './img/'+'_'.join(str(e) for e in hidden_list)
+    plt.savefig(fname=hidden)
+    plt.clf()
+    plt.close('all')
 
 
 # 각 정확도의 평균치를 구하고, 최대 정확도를 보인 노드 경우의 수를 출력합니다.
 def grape2(layer, acc_list):
+    plt.clf()
     train_avg_list = []
     test_avg_list = []
     for i in range(0, len(acc_list)):
@@ -303,7 +309,10 @@ def grape2(layer, acc_list):
     plt.xlim(0, (len(train_avg_list)+1))
     plt.ylim(min(min(np.min(train_avg_list), np.min(test_avg_list)) - 0.02, 0.9), 1)
     plt.legend(loc='lower right')
-    plt.show()
+    # plt.show()
+    plt.savefig('./img/'+layer+'_acc')
+    plt.clf()
+    plt.close('all')
 
     count = 0
     for train_avg in train_avg_list:
