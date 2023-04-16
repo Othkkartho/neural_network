@@ -224,12 +224,12 @@ def five_layer(inputSize=784):
             test_acc_list.append(test_acc)
             # print("train_acc: ", train_acc, ", test_acc: ", test_acc)
 
-    # 그래프 그리기
-    grape1(train_acc_list, test_acc_list)
-
     hidden_list = [100, 75, 50, 25]
     train_avg = sum(train_acc_list[-10:]) / 10
     test_avg = sum(test_acc_list[-10:]) / 10
+
+    # 그래프 그리기
+    grape1(hidden_list, train_acc_list, test_acc_list)
 
     return hidden_list, train_acc_list, test_acc_list, train_avg, test_avg
 
