@@ -13,11 +13,11 @@ from common.trainer_ass import Trainer
 (x_train, t_train), (x_test, t_test) = load_mnist(flatten=False)
 
 # 시간이 오래 걸릴 경우 데이터를 줄인다.
-# x_train, t_train = x_train[:5000], t_train[:5000]
-# x_test, t_test = x_test[:1000], t_test[:1000]
+x_train, t_train = x_train[:5000], t_train[:5000]
+x_test, t_test = x_test[:1000], t_test[:1000]
 
 max_epochs = 20
-for pad_num in range(0, 10, 2):
+for pad_num in range(0, 11, 2):
     for filter_num in range(10, 51, 10):
         network = SimpleConvNet(input_dim=(1, 28, 28),
                                 conv_param={'filter_num': filter_num, 'filter_size': 5, 'pad': pad_num, 'stride': 1},
