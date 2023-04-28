@@ -50,7 +50,7 @@ class Trainer:
 
         loss = self.network.loss(x_batch, t_batch)
         self.train_loss_list.append(loss)
-        if self.verbose: print("train loss:" + str(loss))
+        # if self.verbose: print("train loss:" + str(loss))
 
         if self.current_iter % self.iter_per_epoch == 0:
             self.current_epoch += 1
@@ -67,12 +67,12 @@ class Trainer:
             self.train_acc_list.append(train_acc)
             self.test_acc_list.append(test_acc)
 
-            if self.verbose: print(
-                "=== epoch:" + str(self.current_epoch) + ", train acc:" + str(train_acc) + ", test acc:" + str(
-                    test_acc) + " ===")
+            # if self.verbose: print(
+            #     "=== epoch:" + str(self.current_epoch) + ", train acc:" + str(train_acc) + ", test acc:" + str(
+            #         test_acc) + " ===")
         self.current_iter += 1
 
-    def train(self):
+    def train(self, filter_num, pad):
         for i in range(self.max_iter):
             self.train_step()
 
@@ -80,4 +80,4 @@ class Trainer:
 
         if self.verbose:
             print("=============== Final Test Accuracy ===============")
-            print("test acc:" + str(test_acc))
+            print("filter_num: " + str(filter_num) + ", pad: " + str(pad) + ", test acc:" + str(test_acc))

@@ -7,18 +7,18 @@ import matplotlib.pyplot as plt
 from dataset.mnist import load_mnist
 from simple_convnet_ass import SimpleConvNet
 from three_convnet_ass import ThreeConvNet
-from common.trainer import Trainer
+from common.trainer_ass import Trainer
 
 # 데이터 읽기
 (x_train, t_train), (x_test, t_test) = load_mnist(flatten=False)
 
 # 시간이 오래 걸릴 경우 데이터를 줄인다.
-x_train, t_train = x_train[:5000], t_train[:5000]
-x_test, t_test = x_test[:1000], t_test[:1000]
+# x_train, t_train = x_train[:5000], t_train[:5000]
+# x_test, t_test = x_test[:1000], t_test[:1000]
 
 max_epochs = 20
-for filter_num in range(10, 100, 10):
-    for pad_num in range(0, 10, 2):
+for pad_num in range(0, 10, 2):
+    for filter_num in range(10, 51, 10):
         network = SimpleConvNet(input_dim=(1, 28, 28),
                                 conv_param={'filter_num': filter_num, 'filter_size': 5, 'pad': pad_num, 'stride': 1},
                                 hidden_size=100, output_size=10, weight_init_std=0.01)
@@ -48,7 +48,7 @@ for filter_num in range(10, 100, 10):
         plt.legend(loc='lower right')
         plt.title(str(filter_num) + " - " + str(pad_num) + " - SimpleConvNet")
         # plt.show()
-        hidden = './img/' + str(filter_num) + "_" + str(pad_num) + "_" + "SimpleConvNet"
+        hidden = './img/' + str(pad_num) + "_" + str(filter_num) + "_" + "SimpleConvNet"
         plt.savefig(fname=hidden)
         plt.clf()
         plt.close('all')
