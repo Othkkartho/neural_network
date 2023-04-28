@@ -18,7 +18,7 @@ x_test, t_test = x_test[:1000], t_test[:1000]
 
 max_epochs = 20
 for filter_num in range(10, 100, 10):
-    for pad_num in range(0, 10):
+    for pad_num in range(0, 10, 2):
         network = SimpleConvNet(input_dim=(1, 28, 28),
                                 conv_param={'filter_num': filter_num, 'filter_size': 5, 'pad': pad_num, 'stride': 1},
                                 hidden_size=100, output_size=10, weight_init_std=0.01)
