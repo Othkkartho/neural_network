@@ -47,4 +47,8 @@ for filter_num in range(10, 100, 10):
         plt.ylim(0, 1.0)
         plt.legend(loc='lower right')
         plt.title(str(filter_num) + " - " + str(pad_num) + " - SimpleConvNet")
-        plt.show()
+        # plt.show()
+        hidden = './img/' + str(filter_num) + "_" + str(pad_num) + "_" + "SimpleConvNet"
+        plt.savefig(fname=hidden)
+        plt.clf()
+        plt.close('all')
