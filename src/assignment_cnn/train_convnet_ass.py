@@ -6,6 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from dataset.mnist import load_mnist
 from simple_convnet_ass import SimpleConvNet
+from three_convnet_ass import ThreeConvNet
 from common.trainer import Trainer
 
 # 데이터 읽기
@@ -17,9 +18,13 @@ x_test, t_test = x_test[:1000], t_test[:1000]
 
 max_epochs = 20
 
-network = SimpleConvNet(input_dim=(1, 28, 28),
+# network = SimpleConvNet(input_dim=(1, 28, 28),
+#                         conv_param={'filter_num': 30, 'filter_size': 5, 'pad': 0, 'stride': 1},
+#                         hidden_size=100, output_size=10, weight_init_std=0.01)
+
+network = ThreeConvNet(input_dim=(1, 28, 28),
                         conv_param={'filter_num': 30, 'filter_size': 5, 'pad': 0, 'stride': 1},
-                        hidden_size=100, output_size=10, weight_init_std=0.01)
+                        hidden_size1=100, hidden_size2=95, output_size=10, weight_init_std=0.01)
 
 trainer = Trainer(network, x_train, t_train, x_test, t_test,
                   epochs=max_epochs, mini_batch_size=100,
